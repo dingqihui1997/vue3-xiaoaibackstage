@@ -1,0 +1,118 @@
+.login {
+    .van-field__label {
+        font-size: 14px;
+    }
+
+    .van-cell {
+        padding: 0px;
+    }
+
+    .van-field__label {
+        width: 80px;
+    }
+
+    .van-button {
+        width: 100px;
+        height: 45px;
+        margin-top: 25px;
+    }
+
+    .van-button--danger {
+        margin-left: 10px;
+    }
+}
+
+.city-index {
+    .van-index-bar__index {
+        line-height: 20px;
+    }
+
+    .van-index-bar__sidebar {
+        top: 60%;
+    }
+}
+
+.cartnum {
+    .van-stepper--round {
+        .van-stepper__plus {
+
+            background-color: #666;
+        }
+
+        .van-stepper__minus {
+            color: #fff;
+            background-color: #666;
+            border: 1px solid #666;
+        }
+    }
+}
+
+.details-box {
+    .van-tabs__line {
+        z-index: 0;
+    }
+}
+
+.dialog1 {
+    height: 150px;
+    line-height: 40px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+van-cell van-field .dialog2 {
+    color: #959794;
+}
+
+.usename-box {
+    .van-cell {
+        padding: 0 !important;
+    }
+}
+
+.leftarrow {
+    color: #a6d2fd;
+    font-weight: 700;
+    position: relative;
+    top: 1px;
+    font-size: 18px;
+}
+
+.settlement {
+    .van-image__loading {
+        border: 1px solid #666 !important;
+    }
+}
+
+.tabs-line-wrap {
+    .van-tabs--line {
+        height: 11.733vw;
+        border-radius: 10px;
+        position: relative;
+        top: -22px;
+        left: 20px;
+        width: 90%;
+    }
+
+    .van-tabs__wrap {
+        box-shadow: 0 1px 10px 2px #eee;
+
+    }
+
+    // .van-pagination {
+    //     position: fixed;
+    //     bottom: 0;
+    //     width: 100%;
+    //     background: #fff;
+
+    // .van-pagination__item {
+    //     color: #ff0000
+    // }
+
+    // .van-pagination__item--active {
+    //     color: #fff;
+    //     background-color: #ff0000 !important;
+    // }
+
+    // }
+}

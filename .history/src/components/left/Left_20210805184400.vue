@@ -1,0 +1,66 @@
+<template>
+  <el-menu default-active="2" class="el-menu-vertical-demo" router>
+    <el-menu-item index="3">
+      <i class="el-icon-document"></i>
+      <template #title>首页</template>
+    </el-menu-item>
+    <el-submenu index="item.path" v-for="(item, index) in arr" :key="index">
+      <template #title>
+        <i class="el-icon-location"></i>
+        <span>{{ item.authName }}</span>
+      </template>
+      <el-menu-item-group
+        v-for="(item1, index1) in item.children"
+        :key="index1"
+      >
+        <template #title>{{ item1.authName }}</template>
+      </el-menu-item-group>
+    </el-submenu>
+  </el-menu>
+</template>
+
+<script lang="ts">
+import { defineComponent, onMounted, ref } from "vue";
+import api from "../../http/api";
+interface Obj {
+  id: number;
+  name: string;
+  path: string;
+  children: [];
+}
+interface Obj1 {
+  id: number;
+  authName: string;
+  path: string;
+}
+let arr = ref<Obj[]>([]);
+export default defineComponent({
+  setup() {
+    let shouye = ref<Obj1>({
+      id: 0,
+      authName: "首页",
+      path: "home",
+    });
+    onMounted(() => {
+      api
+        .getmenus()
+        .then((res: any) => {
+          console.log(res);
+          arr.value = res.data;
+          arr.value.unshift(shouye);
+          console.log(arr.value);
+        })
+        .catch((err) => {
+          console.log(err, "请求失败");
+        });
+    });
+    return {
+      arr,
+      shouye,
+    };
+  },
+});
+</script>
+
+<style scoped>
+</style>

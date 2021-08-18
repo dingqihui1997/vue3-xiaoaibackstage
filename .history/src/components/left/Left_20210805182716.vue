@@ -1,0 +1,67 @@
+<template>
+  <el-menu
+    default-active="2"
+    class="el-menu-vertical-demo"
+    @open="handleOpen"
+    @close="handleClose"
+  >
+    <el-menu-item index="3">
+      <i class="el-icon-document"></i>
+      <template #title>首页</template>
+    </el-menu-item>
+    <el-submenu index="1" v-for="(item, index) in arr" :key="index">
+      <template #title>
+        <i class="el-icon-location"></i>
+        <span>{{ item.authName }}</span>
+      </template>
+      <el-menu-item-group
+        v-for="(item1, index1) in item.children"
+        :key="index1"
+      >
+        <template #title>{{ item1.authName }}</template>
+      </el-menu-item-group>
+    </el-submenu>
+  </el-menu>
+</template>
+
+<script lang="ts">
+import { defineComponent, onMounted, ref } from "vue";
+import api from "../../http/api";
+interface Obj {
+  id: number;
+  name: string;
+  path: string;
+  children: [];
+}
+let arr = ref<Obj[]>([]);
+export default defineComponent({
+    const handleOpen = (key, keyPath) => {
+        console.log(key, keyPath);
+      };
+      const handleClose = (key, keyPath) => {
+        console.log(key, keyPath)
+      };
+  setup() {
+    onMounted(() => {
+      api
+        .getmenus()
+        .then((res: any) => {
+          console.log(res);
+          arr.value = res.data;
+          console.log(arr.value);
+        })
+        .catch((err) => {
+          console.log(err, "请求失败");
+        });
+    });
+    return {
+      arr,
+      handleOpen,
+      handleClose
+    };
+  },
+});
+</script>
+
+<style scoped>
+</style>

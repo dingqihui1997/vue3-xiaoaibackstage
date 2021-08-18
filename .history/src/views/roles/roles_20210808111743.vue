@@ -1,0 +1,99 @@
+<template>
+  <div>
+    <el-card class="box-card">
+      <el-button type="primary">添加角色</el-button>
+      <el-table :data="arr" style="width: 100%" :border="true">
+        <el-table-column type="expand">
+          <template #default="props">
+            <el-form label-position="left" inline class="demo-table-expand">
+              <el-form-item label="商品名称">
+                <span>{{ props.row.name }}</span>
+              </el-form-item>
+              <el-form-item label="所属店铺">
+                <span>{{ props.row.shop }}</span>
+              </el-form-item>
+              <el-form-item label="商品 ID">
+                <span>{{ props.row.id }}</span>
+              </el-form-item>
+              <el-form-item label="店铺 ID">
+                <span>{{ props.row.shopId }}</span>
+              </el-form-item>
+              <el-form-item label="商品分类">
+                <span>{{ props.row.category }}</span>
+              </el-form-item>
+              <el-form-item label="店铺地址">
+                <span>{{ props.row.address }}</span>
+              </el-form-item>
+              <el-form-item label="商品描述">
+                <span>{{ props.row.desc }}</span>
+              </el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>
+        <el-table-column label="职位" prop="roleDesc"> </el-table-column>
+        <el-table-column label="描述" prop="roleName"> </el-table-column>
+        <el-table-column label="操作" prop="desc">
+          <template #default="scope">
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              @click="handle(scope.row)"
+            ></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+            ></el-button>
+            <el-button
+              type="warning"
+              icon="el-icon-setting"
+              size="mini"
+            ></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, onMounted, ref } from "vue";
+import api from "../../http/api";
+interface Obj {
+  id: number;
+  roleDesc: string;
+  roleName: string;
+  childre: Obj[];
+}
+export default defineComponent({
+  setup() {
+    const arr = ref<Obj[]>([]);
+    onMounted(() => {
+      roleslist();
+    });
+    //获取角色列表
+    let roleslist = () => {
+      api
+        .roleslist()
+        .then((res: any) => {
+          arr.value = res.data;
+          console.log(arr.value);
+        })
+        .catch((err) => {
+          console.log(err, "获取角色列表失败");
+        });
+    };
+    let handle = (item: any) => {
+      //
+    };
+    return {
+      arr,
+      handle,
+    };
+  },
+});
+</script>
+
+<style scoped>
+</style>
